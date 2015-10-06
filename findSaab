@@ -1,0 +1,41 @@
+#!/bin/bash
+
+avondaleURL=http://www.pickapart.co.nz/stock.asp?yid=1
+mangereURL=http://www.pickapart.co.nz/stock.asp?yid=2
+takaniniURL=http://www.pickapart.co.nz/stock.asp?yid=3
+taurangaURL=http://www.pickapart.co.nz/stock.asp?yid=5
+hamiltonURL=http://www.pickapart.co.nz/stock.asp?yid=6
+
+returnA=`curl -s $avondaleURL | sed -n '/[Ss]aab/ ='`
+returnB=`curl -s $mangereURL | sed -n '/[Ss]aab/ ='`
+returnC=`curl -s $takaniniURL | sed -n '/[Ss]aab/ ='`
+returnD=`curl -s $taurangaURL | sed -n '/[Ss]aab/ ='`
+returnE=`curl -s $hamiltonURL | sed -n '/[Ss]aab/ ='`
+
+result="Found on"
+if
+expr "$returnA" : "[0-9]*" > /dev/null
+then
+export result="${result} Avondale"
+fi
+if
+expr "$returnB" : "[0-9]*" > /dev/null
+then
+export result="${result} Mangere"
+fi
+if
+expr "$returnC" : "[0-9]*" > /dev/null
+then
+export result="${result} Takanini"
+fi
+if
+expr "$returnD" : "[0-9]*" > /dev/null
+then
+export result="${result} Tauranga"
+fi
+if
+expr "$returnE" : "[0-9]*" > /dev/null
+then
+export result="${result} Hamilton"
+fi
+echo $result
